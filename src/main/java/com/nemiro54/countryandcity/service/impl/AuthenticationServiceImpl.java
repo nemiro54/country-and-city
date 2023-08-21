@@ -6,9 +6,12 @@ import com.nemiro54.countryandcity.dto.response.AuthenticationResponse;
 import com.nemiro54.countryandcity.exception.notfound.NotFoundException;
 import com.nemiro54.countryandcity.model.Role;
 import com.nemiro54.countryandcity.model.User;
+import com.nemiro54.countryandcity.repository.RoleRepository;
 import com.nemiro54.countryandcity.repository.UserRepository;
 import com.nemiro54.countryandcity.security.JwtService;
 import com.nemiro54.countryandcity.service.AuthenticationService;
+import java.util.HashSet;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,28 +24,30 @@ import org.springframework.transaction.annotation.Transactional;
 public class AuthenticationServiceImpl implements AuthenticationService {
 
   private final UserRepository userRepository;
+  private final RoleRepository roleRepository;
   private final PasswordEncoder passwordEncoder;
-  private final JwtService jwtService;
   private final AuthenticationManager authenticationManager;
+  private final JwtService jwtService;
 
   @Override
   @Transactional
   public AuthenticationResponse register(RegisterRequest request) {
+    List<Role> roles = roleRepository.findAll();
     User user = User.builder()
         .username(request.getUsername())
         .email(request.getEmail())
         .password(passwordEncoder.encode(request.getPassword()))
-        .role(Role.USER)
+        .roles(new HashSet<>(roles))
         .build();
     userRepository.save(user);
-    String jwtToken = jwtService.generateToken(user);
+    String jwtToken = jwtService.generateToken(user.getUsername());
     return AuthenticationResponse.builder()
         .token(jwtToken)
         .build();
   }
 
   @Override
-  @Transactional(readOnly = true)
+  @Transactional
   public AuthenticationResponse login(LoginRequest request) {
     authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()
@@ -52,7 +57,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         .orElseThrow(() -> new NotFoundException(
             String.format("User not found, username: %s", request.getUsername()))
         );
-    String jwtToken = jwtService.generateToken(user);
+    String jwtToken = jwtService.generateToken(user.getUsername());
     return AuthenticationResponse.builder()
         .token(jwtToken)
         .build();

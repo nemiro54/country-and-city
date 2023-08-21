@@ -14,7 +14,6 @@ import org.springframework.http.HttpHeaders;
 @Configuration
 public class DocumentationConfig {
 
-
   @Bean
   public OpenAPI openAPI() {
     return new OpenAPI()

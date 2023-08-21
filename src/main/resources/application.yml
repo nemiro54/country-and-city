@@ -16,9 +16,10 @@ spring:
     url: jdbc:postgresql://localhost:5432/country_service
     user: postgres
     password: postgres
-    locations: classpath:db/migration
+    locations: classpath:db/migration, classpath:db/testdata
     baseline-on-migrate: true
 
 authentication:
   token:
     key: fe2fc29894e4e1d80273c48602db413a67dd8b4077c6fa1c8de6e566e5b159ee
+    expiration: 3600000 # 1 hour in millis

@@ -1,0 +1,5 @@
+INSERT INTO roles (id, name)
+VALUES ('3a98ca86-8841-4405-9f8d-94607fbb7b55', 'EDITOR'),
+       ('4a98ca86-8841-4405-9f8d-94607fbb7b56', 'VIEWER'),
+       ('5a98ca86-8841-4405-9f8d-94607fbb7b56', 'USER')
+ON CONFLICT (id) DO NOTHING;
