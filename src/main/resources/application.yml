@@ -1,7 +1,24 @@
 spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/country_service
+    username: postgres
+    password: postgres
+
+  jpa:
+    show-sql: true
+    database: postgresql
+    properties:
+      hibernate:
+        format_sql: true
+
   flyway:
     enabled: true
     url: jdbc:postgresql://localhost:5432/country_service
     user: postgres
     password: postgres
     locations: classpath:db/migration
+    baseline-on-migrate: true
+
+authentication:
+  token:
+    key: fe2fc29894e4e1d80273c48602db413a67dd8b4077c6fa1c8de6e566e5b159ee
