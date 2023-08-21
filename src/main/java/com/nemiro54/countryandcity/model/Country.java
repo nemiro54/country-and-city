@@ -1,10 +1,10 @@
 package com.nemiro54.countryandcity.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import java.util.UUID;
 import lombok.AccessLevel;
@@ -27,8 +27,11 @@ public class Country {
   @GeneratedValue(strategy = GenerationType.AUTO)
   UUID id;
 
+  @Column(unique = true)
   String name;
 
-  @Lob
-  byte[] logo;
+  @Column(name = "alpha3_code", unique = true)
+  String alpha3Code;
+
+  String flagUrl;
 }

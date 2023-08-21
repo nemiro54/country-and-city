@@ -1,16 +1,16 @@
 CREATE TABLE IF NOT EXISTS countries
 (
     id   UUID PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    flag BYTEA
+    name VARCHAR(255) UNIQUE NOT NULL,
+    alpha3_code VARCHAR(255) UNIQUE NOT NULL,
+    flag_url VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS cities
 (
     id         UUID PRIMARY KEY,
     name       VARCHAR(255) NOT NULL,
-    country_id UUID REFERENCES countries (id),
-    logo       BYTEA
+    country_id UUID REFERENCES countries (id)
 );
 
 CREATE TABLE IF NOT EXISTS users

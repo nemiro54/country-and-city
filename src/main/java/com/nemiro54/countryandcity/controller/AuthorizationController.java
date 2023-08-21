@@ -2,8 +2,8 @@ package com.nemiro54.countryandcity.controller;
 
 
 import com.nemiro54.countryandcity.dto.request.LoginRequest;
-import com.nemiro54.countryandcity.dto.response.AuthenticationResponse;
 import com.nemiro54.countryandcity.dto.request.RegisterRequest;
+import com.nemiro54.countryandcity.dto.response.AuthenticationResponse;
 import com.nemiro54.countryandcity.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
