@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -29,28 +30,28 @@ public class CityController {
 
   @Operation(summary = "Get all cities (paged)", description = "Returns a page of cities")
   @GetMapping
-  public Page<CityDto> getCities(@PageableDefault(size = 20) Pageable pageable) {
-    return cityService.getCities(pageable);
+  public ResponseEntity<Page<CityDto>> getCities(@PageableDefault(size = 20) Pageable pageable) {
+    return ResponseEntity.ok(cityService.getCities(pageable));
   }
 
   @Operation(summary = "Get all cities by country name (paged)", description = "Returns a page of cities by country name")
   @GetMapping("/country/{countryName}")
-  public Page<CityDto> getCitiesByCountryName(
+  public ResponseEntity<Page<CityDto>> getCitiesByCountryName(
       @PathVariable String countryName, @PageableDefault(size = 20) Pageable pageable
   ) {
-    return cityService.getCitiesByCountryName(countryName, pageable);
+    return ResponseEntity.ok(cityService.getCitiesByCountryName(countryName, pageable));
   }
 
   @Operation(summary = "Get a city by name", description = "Returns a city by name")
   @GetMapping("/{name}")
-  public List<CityDto> getCity(@PathVariable String name) {
-    return cityService.getCity(name);
+  public ResponseEntity<List<CityDto>> getCity(@PathVariable String name) {
+    return ResponseEntity.ok(cityService.getCity(name));
   }
 
   @Operation(summary = "Update a city", description = "Updates a city")
   @PatchMapping("/{id}")
   @PreAuthorize("hasAuthority(T(com.nemiro54.countryandcity.security.Role).EDITOR)")
-  public CityDto updateCity(@PathVariable UUID id, @RequestBody UpdateCityRequestDto dto) {
-    return cityService.updateCity(id, dto);
+  public ResponseEntity<CityDto> updateCity(@PathVariable UUID id, @RequestBody UpdateCityRequestDto dto) {
+    return ResponseEntity.ok(cityService.updateCity(id, dto));
   }
 }

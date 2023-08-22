@@ -2,7 +2,7 @@ package com.nemiro54.countryandcity.service.impl;
 
 import com.nemiro54.countryandcity.dto.request.LoginRequest;
 import com.nemiro54.countryandcity.dto.request.RegisterRequest;
-import com.nemiro54.countryandcity.dto.response.AuthenticationResponse;
+import com.nemiro54.countryandcity.dto.response.AuthorizationResponse;
 import com.nemiro54.countryandcity.exception.notfound.NotFoundException;
 import com.nemiro54.countryandcity.model.User;
 import com.nemiro54.countryandcity.repository.UserRepository;
@@ -27,7 +27,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
   @Override
   @Transactional
-  public AuthenticationResponse register(RegisterRequest request) {
+  public AuthorizationResponse register(RegisterRequest request) {
     User user = User.builder()
         .username(request.username())
         .email(request.email())
@@ -36,14 +36,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         .build();
     userRepository.save(user);
     String jwtToken = jwtService.generateToken(user.getUsername());
-    return AuthenticationResponse.builder()
-        .token(jwtToken)
-        .build();
+    return new AuthorizationResponse(jwtToken);
   }
 
   @Override
   @Transactional
-  public AuthenticationResponse login(LoginRequest request) {
+  public AuthorizationResponse login(LoginRequest request) {
     authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(request.username(), request.password()
         )
@@ -53,8 +51,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             String.format("User not found, username: %s", request.username()))
         );
     String jwtToken = jwtService.generateToken(user.getUsername());
-    return AuthenticationResponse.builder()
-        .token(jwtToken)
-        .build();
+    return new AuthorizationResponse(jwtToken);
   }
 }

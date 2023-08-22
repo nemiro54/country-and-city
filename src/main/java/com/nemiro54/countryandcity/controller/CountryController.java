@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,7 @@ public class CountryController {
 
   @Operation(summary = "Get all countries (paged)", description = "Returns a page of countries")
   @GetMapping
-  public Page<CountryDto> getCountries(@PageableDefault(size = 20)Pageable pageable) {
-    return countryService.getCountries(pageable);
+  public ResponseEntity<Page<CountryDto>> getCountries(@PageableDefault(size = 20)Pageable pageable) {
+    return ResponseEntity.ok(countryService.getCountries(pageable));
   }
 }
