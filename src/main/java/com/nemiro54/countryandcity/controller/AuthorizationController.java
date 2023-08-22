@@ -3,7 +3,7 @@ package com.nemiro54.countryandcity.controller;
 import com.nemiro54.countryandcity.dto.request.LoginRequest;
 import com.nemiro54.countryandcity.dto.request.RegisterRequest;
 import com.nemiro54.countryandcity.dto.response.AuthorizationResponse;
-import com.nemiro54.countryandcity.service.AuthenticationService;
+import com.nemiro54.countryandcity.service.AuthorizationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Authorization Controller")
 public class AuthorizationController {
 
-  private final AuthenticationService service;
+  private final AuthorizationService service;
 
   @Operation(summary = "Sign Up a new user", description = "Registers a new user and returns a token")
   @PostMapping("/register")

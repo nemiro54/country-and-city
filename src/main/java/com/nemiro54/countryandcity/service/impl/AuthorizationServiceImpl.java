@@ -7,7 +7,7 @@ import com.nemiro54.countryandcity.exception.notfound.NotFoundException;
 import com.nemiro54.countryandcity.model.User;
 import com.nemiro54.countryandcity.repository.UserRepository;
 import com.nemiro54.countryandcity.security.JwtService;
-import com.nemiro54.countryandcity.service.AuthenticationService;
+import com.nemiro54.countryandcity.service.AuthorizationService;
 import java.util.HashSet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class AuthenticationServiceImpl implements AuthenticationService {
+public class AuthorizationServiceImpl implements AuthorizationService {
 
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;

@@ -6,5 +6,11 @@ import org.springframework.data.domain.Pageable;
 
 public interface CountryService {
 
+  /**
+   * Retrieve a paginated list of countries.
+   *
+   * @param pageable The pagination information.
+   * @return A {@link Page} of {@link CountryDto} objects representing countries.
+   */
   Page<CountryDto> getCountries(Pageable pageable);
 }
