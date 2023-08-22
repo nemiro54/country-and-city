@@ -50,7 +50,7 @@ public class CityController {
 
   @Operation(summary = "Update a city", description = "Updates a city")
   @PatchMapping("/{id}")
-  @PreAuthorize("hasAuthority(T(com.nemiro54.countryandcity.security.Role).EDITOR)")
+  @PreAuthorize("hasAuthority(T(com.nemiro54.countryandcity.security.AuthorityType).EDITOR)")
   public ResponseEntity<CityDto> updateCity(@PathVariable UUID id, @RequestBody UpdateCityRequestDto dto) {
     return ResponseEntity.ok(cityService.updateCity(id, dto));
   }
