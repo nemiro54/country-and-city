@@ -4,14 +4,11 @@ import com.nemiro54.countryandcity.dto.request.LoginRequest;
 import com.nemiro54.countryandcity.dto.request.RegisterRequest;
 import com.nemiro54.countryandcity.dto.response.AuthenticationResponse;
 import com.nemiro54.countryandcity.exception.notfound.NotFoundException;
-import com.nemiro54.countryandcity.model.Role;
 import com.nemiro54.countryandcity.model.User;
-import com.nemiro54.countryandcity.repository.RoleRepository;
 import com.nemiro54.countryandcity.repository.UserRepository;
 import com.nemiro54.countryandcity.security.JwtService;
 import com.nemiro54.countryandcity.service.AuthenticationService;
 import java.util.HashSet;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class AuthenticationServiceImpl implements AuthenticationService {
 
   private final UserRepository userRepository;
-  private final RoleRepository roleRepository;
   private final PasswordEncoder passwordEncoder;
   private final AuthenticationManager authenticationManager;
   private final JwtService jwtService;
@@ -32,12 +28,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
   @Override
   @Transactional
   public AuthenticationResponse register(RegisterRequest request) {
-    List<Role> roles = roleRepository.findAll();
     User user = User.builder()
         .username(request.getUsername())
         .email(request.getEmail())
         .password(passwordEncoder.encode(request.getPassword()))
-        .roles(new HashSet<>(roles))
+        .roles(new HashSet<>())
         .build();
     userRepository.save(user);
     String jwtToken = jwtService.generateToken(user.getUsername());

@@ -33,4 +33,6 @@ public class City {
   @ManyToOne
   @JoinColumn(name = "country_id")
   Country country;
+
+  String flagUrl;
 }
