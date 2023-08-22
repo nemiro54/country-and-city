@@ -1,7 +1,7 @@
 package com.nemiro54.countryandcity.service.impl;
 
 import com.nemiro54.countryandcity.dto.request.UpdateCityRequestDto;
-import com.nemiro54.countryandcity.dto.response.CityDto;
+import com.nemiro54.countryandcity.dto.CityDto;
 import com.nemiro54.countryandcity.exception.notfound.NotFoundException;
 import com.nemiro54.countryandcity.mapper.CityMapper;
 import com.nemiro54.countryandcity.model.City;

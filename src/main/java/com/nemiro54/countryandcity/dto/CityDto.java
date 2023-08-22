@@ -1,4 +1,4 @@
-package com.nemiro54.countryandcity.dto.response;
+package com.nemiro54.countryandcity.dto;
 
 public record CityDto(
     String name,

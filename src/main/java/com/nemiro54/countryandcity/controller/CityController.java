@@ -1,7 +1,7 @@
 package com.nemiro54.countryandcity.controller;
 
 import com.nemiro54.countryandcity.dto.request.UpdateCityRequestDto;
-import com.nemiro54.countryandcity.dto.response.CityDto;
+import com.nemiro54.countryandcity.dto.CityDto;
 import com.nemiro54.countryandcity.service.CityService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

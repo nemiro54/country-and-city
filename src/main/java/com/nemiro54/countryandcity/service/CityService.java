@@ -1,7 +1,7 @@
 package com.nemiro54.countryandcity.service;
 
 import com.nemiro54.countryandcity.dto.request.UpdateCityRequestDto;
-import com.nemiro54.countryandcity.dto.response.CityDto;
+import com.nemiro54.countryandcity.dto.CityDto;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.data.domain.Pageable;
