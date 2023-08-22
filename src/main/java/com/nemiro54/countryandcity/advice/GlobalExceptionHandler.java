@@ -14,9 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-  @ExceptionHandler({
-      AuthenticationException.class
-  })
+  @ExceptionHandler(AuthenticationException.class)
   public ResponseEntity<ExceptionMessageResponse> handleAuthenticationException(Exception ex) {
     ExceptionMessageResponse response = new ExceptionMessageResponse(
         Instant.now(), "Authentication Failed", ex.getMessage()
@@ -24,9 +22,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
   }
 
-  @ExceptionHandler({
-      AccessDeniedException.class
-  })
+  @ExceptionHandler(AccessDeniedException.class)
   public ResponseEntity<ExceptionMessageResponse> handleAccessDeniedException(Exception ex) {
     ExceptionMessageResponse response = new ExceptionMessageResponse(
         Instant.now(), "Not Enough Rights", ex.getMessage()
@@ -34,9 +30,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
   }
 
-  @ExceptionHandler({
-      NotFoundException.class
-  })
+  @ExceptionHandler(NotFoundException.class)
   public ResponseEntity<ExceptionMessageResponse> handleNotFoundException(Exception ex) {
     ExceptionMessageResponse response = new ExceptionMessageResponse(
         Instant.now(), "Not Found", ex.getMessage()
