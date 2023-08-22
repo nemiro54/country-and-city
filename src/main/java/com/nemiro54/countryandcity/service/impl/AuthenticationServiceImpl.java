@@ -29,9 +29,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
   @Transactional
   public AuthenticationResponse register(RegisterRequest request) {
     User user = User.builder()
-        .username(request.getUsername())
-        .email(request.getEmail())
-        .password(passwordEncoder.encode(request.getPassword()))
+        .username(request.username())
+        .email(request.email())
+        .password(passwordEncoder.encode(request.password()))
         .roles(new HashSet<>())
         .build();
     userRepository.save(user);
@@ -45,12 +45,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
   @Transactional
   public AuthenticationResponse login(LoginRequest request) {
     authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()
+        new UsernamePasswordAuthenticationToken(request.username(), request.password()
         )
     );
-    User user = userRepository.findUserByUsername(request.getUsername())
+    User user = userRepository.findUserByUsername(request.username())
         .orElseThrow(() -> new NotFoundException(
-            String.format("User not found, username: %s", request.getUsername()))
+            String.format("User not found, username: %s", request.username()))
         );
     String jwtToken = jwtService.generateToken(user.getUsername());
     return AuthenticationResponse.builder()
