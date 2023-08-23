@@ -4,6 +4,7 @@ import com.nemiro54.countryandcity.dto.request.UpdateCityRequestDto;
 import com.nemiro54.countryandcity.dto.CityDto;
 import com.nemiro54.countryandcity.service.CityService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import java.util.UUID;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/cities")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "Bearer Authentication")
 @Tag(name = "City Controller")
 public class CityController {
 
