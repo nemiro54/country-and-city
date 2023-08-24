@@ -1,6 +1,7 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/country_service
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:5432/country_service
     username: postgres
     password: postgres
 
@@ -13,7 +14,8 @@ spring:
 
   flyway:
     enabled: true
-    url: jdbc:postgresql://localhost:5432/country_service
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:5432/country_service
     user: postgres
     password: postgres
     locations: classpath:db/migration, classpath:db/testdata

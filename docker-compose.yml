@@ -1,0 +1,25 @@
+version: "2"
+
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    volumes:
+      - ./postgres_init.sql:/docker-entrypoint-initdb.d/postgre_init.sql
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+
+  country-city-service:
+    restart: always
+    container_name: country-city-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      POSTGRES_HOST: postgres
