@@ -12,7 +12,6 @@ services:
       POSTGRES_PASSWORD: postgres
 
   country-city-service:
-    restart: always
     container_name: country-city-service
     ports:
       - "8080:8080"
