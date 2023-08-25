@@ -22,24 +22,23 @@ Before you begin, ensure you have met the following requirements:
 
 ## Getting Started
 
-### Installation
+### Installation and Usage
 
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/nemiro54/country-and-city-list.git
+   git clone https://github.com/nemiro54/country-and-city.git
    ```
-2. Build the project using Maven:
+2. Move to the repository directory
    ```sh
-   mvn clean install
+   cd country-and-city
    ```
 
-## Usage
+3. Build and run
+   ```sh
+   docker-compose up
+   ```
 
-To run the application, use the following Maven command:
-```sh
-mvn spring-boot:run
-```
 The application will start, and you can access it via http://localhost:8080 in your web browser.
 
 ## Endpoints
