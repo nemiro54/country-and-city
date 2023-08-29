@@ -49,7 +49,7 @@ public class PredefinedEntity {
       .build();
 
   public static final CountryDto COUNTRY_DTO = new CountryDto(
-      "Belarus", "/url"
+      DEFAULT_UUID, "Belarus", "/url"
   );
 
   public static final City CITY = City.builder()
@@ -60,7 +60,7 @@ public class PredefinedEntity {
       .build();
 
   public static final CityDto CITY_DTO = new CityDto(
-      "Minsk", "Belarus", "/url"
+      DEFAULT_UUID, "Minsk", "Belarus", "/url"
   );
 
   public static final UpdateCityRequestDto UPDATE_CITY_REQUEST_DTO = new UpdateCityRequestDto(

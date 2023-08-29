@@ -86,7 +86,7 @@ class CityServiceImplTest {
   void updateCity() {
     // Setup
     CityDto expectedCityDto = new CityDto(
-        UPDATE_CITY_REQUEST_DTO.name(), CITY_DTO.countryName(), UPDATE_CITY_REQUEST_DTO.flagUrl()
+        CITY_DTO.id(), UPDATE_CITY_REQUEST_DTO.name(), CITY_DTO.countryName(), UPDATE_CITY_REQUEST_DTO.flagUrl()
     );
     when(cityRepository.findById(any(UUID.class))).thenReturn(Optional.of(CITY));
     when(cityRepository.save(any(City.class))).thenReturn(CITY);
