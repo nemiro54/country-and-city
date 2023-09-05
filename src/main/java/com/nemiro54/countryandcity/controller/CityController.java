@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -32,14 +33,17 @@ public class CityController {
 
   @Operation(summary = "Get all cities (paged)", description = "Returns a page of cities")
   @GetMapping
-  public ResponseEntity<Page<CityDto>> getCities(@PageableDefault(size = 20) Pageable pageable) {
+  public ResponseEntity<Page<CityDto>> getCities(
+      @ParameterObject @PageableDefault(size = 20) Pageable pageable
+  ) {
     return ResponseEntity.ok(cityService.getCities(pageable));
   }
 
   @Operation(summary = "Get all cities by country name (paged)", description = "Returns a page of cities by country name")
   @GetMapping("/country/{countryName}")
   public ResponseEntity<Page<CityDto>> getCitiesByCountryName(
-      @PathVariable String countryName, @PageableDefault(size = 20) Pageable pageable
+      @PathVariable String countryName,
+      @ParameterObject @PageableDefault(size = 20) Pageable pageable
   ) {
     return ResponseEntity.ok(cityService.getCitiesByCountryName(countryName, pageable));
   }
@@ -53,7 +57,10 @@ public class CityController {
   @Operation(summary = "Update a city", description = "Updates a city")
   @PatchMapping("/{id}")
   @PreAuthorize("hasAuthority(T(com.nemiro54.countryandcity.security.AuthorityType).EDITOR)")
-  public ResponseEntity<CityDto> updateCity(@PathVariable UUID id, @RequestBody UpdateCityRequestDto dto) {
+  public ResponseEntity<CityDto> updateCity(
+      @PathVariable UUID id,
+      @RequestBody UpdateCityRequestDto dto
+  ) {
     return ResponseEntity.ok(cityService.updateCity(id, dto));
   }
 }
